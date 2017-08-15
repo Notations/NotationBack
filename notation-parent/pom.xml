@@ -12,6 +12,8 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<servlet.version>3.0.1</servlet.version>
+
 		<!-- Validators -->
 		<javax-validation.version>1.1.0.Final</javax-validation.version>
 
@@ -42,7 +44,7 @@
 		<codehaus-jackson.version>1.9.13</codehaus-jackson.version>
 
 		<!-- Jackson version -->
-		<jackson.version>2.4.1</jackson.version>
+		<jackson.version>2.5.0</jackson.version>
 
 		<!-- Logging -->
 		<log4j.version>1.2.17</log4j.version>
@@ -63,6 +65,17 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
