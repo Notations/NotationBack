@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
  * The Class Indicators.
  */
 @Entity
-@IdClass(IndicatorId.class)
+@IdClass(IndicatorsId.class)
 public class Indicators implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -21,11 +21,7 @@ public class Indicators implements Serializable {
 
 	/** The indicator id. */
 	@Id
-	private int indicatorId;
-
-	/** The category id. */
-	@Id
-	private int categoryId;
+	private int indicatorLabelId;
 
 	/** The time id. */
 	@Id
@@ -37,17 +33,12 @@ public class Indicators implements Serializable {
 
 	/** The indicator value. */
 	@Column
-	private int indicatorValue;
+	private float indicatorValue;
 
 	/** The indicator. */
 	@ManyToOne
-	@JoinColumn(name = "indicatorId", updatable = false, insertable = false)
-	private Indicator indicator;
-
-	/** The category. */
-	@ManyToOne
-	@JoinColumn(name = "categoryId", updatable = false, insertable = false)
-	private Category category;
+	@JoinColumn(name = "indicatorLabelId", updatable = false, insertable = false)
+	private IndicatorLabel indicatorLabel;
 
 	/** The time. */
 	@ManyToOne
@@ -109,7 +100,7 @@ public class Indicators implements Serializable {
 	 *
 	 * @return the indicator value
 	 */
-	public int getIndicatorValue() {
+	public float getIndicatorValue() {
 		return this.indicatorValue;
 	}
 
@@ -119,7 +110,7 @@ public class Indicators implements Serializable {
 	 * @param indicatorValue
 	 *            the new indicator value
 	 */
-	public void setIndicatorValue(final int indicatorValue) {
+	public void setIndicatorValue(final float indicatorValue) {
 		this.indicatorValue = indicatorValue;
 	}
 
@@ -168,8 +159,8 @@ public class Indicators implements Serializable {
 	 *
 	 * @return the indicator id
 	 */
-	public int getIndicatorId() {
-		return this.indicatorId;
+	public int getIndicatorLabelId() {
+		return this.indicatorLabelId;
 	}
 
 	/**
@@ -177,26 +168,8 @@ public class Indicators implements Serializable {
 	 *
 	 * @param indicatorId the new indicator id
 	 */
-	public void setIndicatorId(final int indicatorId) {
-		this.indicatorId = indicatorId;
-	}
-
-	/**
-	 * Gets the category id.
-	 *
-	 * @return the category id
-	 */
-	public int getCategoryId() {
-		return this.categoryId;
-	}
-
-	/**
-	 * Sets the category id.
-	 *
-	 * @param categoryId the new category id
-	 */
-	public void setCategoryId(final int categoryId) {
-		this.categoryId = categoryId;
+	public void setIndicatorLabelId(final int indicatorLabelId) {
+		this.indicatorLabelId = indicatorLabelId;
 	}
 
 	/**
@@ -204,8 +177,8 @@ public class Indicators implements Serializable {
 	 *
 	 * @return the indicator
 	 */
-	public Indicator getIndicator() {
-		return this.indicator;
+	public IndicatorLabel getIndicator() {
+		return this.indicatorLabel;
 	}
 
 	/**
@@ -213,26 +186,8 @@ public class Indicators implements Serializable {
 	 *
 	 * @param indicator the new indicator
 	 */
-	public void setIndicator(final Indicator indicator) {
-		this.indicator = indicator;
-	}
-
-	/**
-	 * Gets the category.
-	 *
-	 * @return the category
-	 */
-	public Category getCategory() {
-		return this.category;
-	}
-
-	/**
-	 * Sets the category.
-	 *
-	 * @param category the new category
-	 */
-	public void setCategory(final Category category) {
-		this.category = category;
+	public void setIndicator(final IndicatorLabel indicatorLabel) {
+		this.indicatorLabel = indicatorLabel;
 	}
 
 	/**

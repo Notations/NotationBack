@@ -6,5 +6,6 @@ package com.notation.back.exceptions;
 public enum ErrorCode {
 
 	/** The configuration file not found. */
-	CONFIGURATION_FILE_NOT_FOUND
+	CONFIGURATION_FILE_NOT_FOUND,
+	PARAMETER_NOT_FOUND
 }

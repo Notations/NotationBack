@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * The Class CoreConfiguration.
  */
 @Configuration
-@ComponentScan("com.notation.back.services")
+@ComponentScan({"com.notation.back.services"})
 public class CoreConfiguration {
 
 

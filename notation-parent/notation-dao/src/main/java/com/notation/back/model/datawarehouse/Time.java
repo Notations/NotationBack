@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,6 +22,7 @@ public class Time {
 
 	/** The indicator id. */
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int timeId;
 
 	/** The indicator name. */
@@ -29,8 +32,8 @@ public class Time {
 	/** The indicators. */
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "indicatorId")
-	private Collection<Indicator> indicators;
+	@JoinColumn(name = "timeId")
+	private Collection<Indicators> indicators;
 
 	/**
 	 * Instantiates a new time.
@@ -39,7 +42,7 @@ public class Time {
 	 * @param year the year
 	 * @param indicators the indicators
 	 */
-	public Time(final int timeId, final int year, final Collection<Indicator> indicators) {
+	public Time(final int timeId, final int year, final Collection<Indicators> indicators) {
 		super();
 		this.timeId = timeId;
 		this.year = year;
@@ -94,7 +97,7 @@ public class Time {
 	 *
 	 * @return the indicators
 	 */
-	public Collection<Indicator> getIndicators() {
+	public Collection<Indicators> getIndicators() {
 		return this.indicators;
 	}
 
@@ -103,7 +106,7 @@ public class Time {
 	 *
 	 * @param indicators the new indicators
 	 */
-	public void setIndicators(final Collection<Indicator> indicators) {
+	public void setIndicators(final Collection<Indicators> indicators) {
 		this.indicators = indicators;
 	}
 

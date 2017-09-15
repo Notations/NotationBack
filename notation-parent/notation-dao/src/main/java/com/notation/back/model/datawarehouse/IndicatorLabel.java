@@ -7,8 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,14 +20,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * The Class Indicator.
  */
 @Entity
-public class Indicator implements Serializable{
+public class IndicatorLabel implements Serializable{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7138088326679131375L;
 
 	/** The indicator id. */
 	@Id
-	private int indicatorId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int indicatorLabelId;
 
 	/** The indicator name. */
 	@Column
@@ -32,13 +36,17 @@ public class Indicator implements Serializable{
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "indicatorId")
-	private Collection<Indicator> indicators;
+	@JoinColumn(name = "indicatorLabelId")
+	private Collection<Indicators> indicators;
+
+	@ManyToOne
+	@JoinColumn(name = "categoryId", updatable = false, insertable = false)
+	private Category category;
 
 	/**
 	 * Instantiates a new indicator.
 	 */
-	public Indicator() {
+	public IndicatorLabel() {
 		super();
 	}
 
@@ -48,9 +56,9 @@ public class Indicator implements Serializable{
 	 * @param indicatorId the indicator id
 	 * @param indicatorName the indicator name
 	 */
-	public Indicator(final int indicatorId, final String indicatorName) {
+	public IndicatorLabel(final int indicatorLabelId, final String indicatorName) {
 		super();
-		this.indicatorId = indicatorId;
+		this.indicatorLabelId = indicatorLabelId;
 		this.indicatorName = indicatorName;
 	}
 
@@ -59,8 +67,8 @@ public class Indicator implements Serializable{
 	 *
 	 * @return the indicator id
 	 */
-	public int getIndicatorId() {
-		return this.indicatorId;
+	public int getIndicatorLabelId() {
+		return this.indicatorLabelId;
 	}
 
 	/**
@@ -68,8 +76,8 @@ public class Indicator implements Serializable{
 	 *
 	 * @param indicatorId the new indicator id
 	 */
-	public void setIndicatorId(final int indicatorId) {
-		this.indicatorId = indicatorId;
+	public void setIndicatorLabelId(final int indicatorLabelId) {
+		this.indicatorLabelId = indicatorLabelId;
 	}
 
 	/**
@@ -88,6 +96,26 @@ public class Indicator implements Serializable{
 	 */
 	public void setIndicatorName(final String indicatorName) {
 		this.indicatorName = indicatorName;
+	}
+
+	public Collection<Indicators> getIndicators() {
+		return this.indicators;
+	}
+
+	public void setIndicators(final Collection<Indicators> indicators) {
+		this.indicators = indicators;
+	}
+
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(final Category category) {
+		this.category = category;
+	}
+
+	public static long getSerialversionuid() {
+		return IndicatorLabel.serialVersionUID;
 	}
 
 }

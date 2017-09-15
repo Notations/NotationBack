@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,6 +22,7 @@ public class Country {
 
 	/** The indicator id. */
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int countryId;
 
 	/** The indicator name. */
@@ -34,7 +37,7 @@ public class Country {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "countryId")
-	private Collection<Indicator> indicators;
+	private Collection<Indicators> indicators;
 
 
 
@@ -45,7 +48,7 @@ public class Country {
 	 * @param countryName the country name
 	 * @param indicators the indicators
 	 */
-	public Country(final int countryId, final String countryName, final Collection<Indicator> indicators) {
+	public Country(final int countryId, final String countryName, final Collection<Indicators> indicators) {
 		super();
 		this.countryId = countryId;
 		this.countryName = countryName;
@@ -104,7 +107,7 @@ public class Country {
 	 *
 	 * @return the indicators
 	 */
-	public Collection<Indicator> getIndicators() {
+	public Collection<Indicators> getIndicators() {
 		return this.indicators;
 	}
 
@@ -113,7 +116,7 @@ public class Country {
 	 *
 	 * @param indicators the new indicators
 	 */
-	public void setIndicators(final Collection<Indicator> indicators) {
+	public void setIndicators(final Collection<Indicators> indicators) {
 		this.indicators = indicators;
 	}
 }

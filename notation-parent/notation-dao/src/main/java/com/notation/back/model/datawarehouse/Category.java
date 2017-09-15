@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Category {
 	/** The indicator id. */
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
 
 	/** The indicator name. */
@@ -28,16 +31,16 @@ public class Category {
 	/** The indicators. */
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "indicatorId")
-	private Collection<Indicator> indicators;
+	@JoinColumn(name = "indicatorLabelId")
+	private Collection<IndicatorLabel> indicatorLabel;
 
 
 
-	public Category(final int categoryId, final String categoryName, final Collection<Indicator> indicators) {
+	public Category(final int categoryId, final String categoryName, final Collection<IndicatorLabel> indicatorLabel) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
-		this.indicators = indicators;
+		this.indicatorLabel = indicatorLabel;
 	}
 
 	public Category() {
@@ -85,8 +88,8 @@ public class Category {
 	 *
 	 * @return the indicators
 	 */
-	public Collection<Indicator> getIndicators() {
-		return this.indicators;
+	public Collection<IndicatorLabel> getIndicators() {
+		return this.indicatorLabel;
 	}
 
 	/**
@@ -94,7 +97,7 @@ public class Category {
 	 *
 	 * @param indicators the new indicators
 	 */
-	public void setIndicators(final Collection<Indicator> indicators) {
-		this.indicators = indicators;
+	public void setIndicators(final Collection<IndicatorLabel> indicatorLabel) {
+		this.indicatorLabel = indicatorLabel;
 	}
 }

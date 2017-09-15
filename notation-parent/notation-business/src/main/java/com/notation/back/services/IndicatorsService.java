@@ -4,19 +4,25 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.notation.back.model.datawarehouse.Indicators;
+import com.notation.back.datawarehouse.dto.IndicatorsWrapper;
+import com.notation.back.datawarehouse.repository.dto.IndicatorsParametersWrapper;
+import com.notation.back.exceptions.ParameterNotFoundException;
 
 /**
  * The Interface IndicatorsService.
  */
-@Service
+@Service(value="indicatorsService")
 public interface IndicatorsService {
 
+
+
 	/**
-	 * Gets the indicators.
+	 * Gets the indicators by parameters.
 	 *
-	 * @return the indicators
+	 * @param indicatorsParametersWrapper the indicators parameters wrapper
+	 * @return the indicators by parameters
+	 * @throws ParameterNotFoundException
 	 */
-	List<Indicators> getIndicators();
+	List<IndicatorsWrapper> getIndicatorsByParameters(IndicatorsParametersWrapper indicatorsParametersWrapper) throws ParameterNotFoundException;
 
 }

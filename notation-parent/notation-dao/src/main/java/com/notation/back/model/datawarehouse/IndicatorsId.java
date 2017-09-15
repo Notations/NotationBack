@@ -5,16 +5,12 @@ import java.io.Serializable;
 /**
  * The Class IndicatorId.
  */
-public class IndicatorId implements Serializable{
+public class IndicatorsId implements Serializable{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7103931504764688792L;
 
-	/** The indicator id. */
-	private int indicatorId;
-
-	/** The category id. */
-	private int categoryId;
+	private int indicatorLabelId;
 
 	/** The time id. */
 	private int timeId;
@@ -27,8 +23,8 @@ public class IndicatorId implements Serializable{
 	 *
 	 * @return the indicator id
 	 */
-	public int getIndicatorId() {
-		return this.indicatorId;
+	public int getIndicatorLabelId() {
+		return this.indicatorLabelId;
 	}
 
 	/**
@@ -36,26 +32,8 @@ public class IndicatorId implements Serializable{
 	 *
 	 * @param indicatorId the new indicator id
 	 */
-	public void setIndicatorId(final int indicatorId) {
-		this.indicatorId = indicatorId;
-	}
-
-	/**
-	 * Gets the category id.
-	 *
-	 * @return the category id
-	 */
-	public int getCategoryId() {
-		return this.categoryId;
-	}
-
-	/**
-	 * Sets the category id.
-	 *
-	 * @param categoryId the new category id
-	 */
-	public void setCategoryId(final int categoryId) {
-		this.categoryId = categoryId;
+	public void setIndicatorLabelId(final int indicatorLabelId) {
+		this.indicatorLabelId = indicatorLabelId;
 	}
 
 	/**
@@ -100,6 +78,6 @@ public class IndicatorId implements Serializable{
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid() {
-		return IndicatorId.serialVersionUID;
+		return IndicatorsId.serialVersionUID;
 	}
 }

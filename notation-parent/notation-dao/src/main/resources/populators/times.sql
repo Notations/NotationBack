@@ -1,0 +1,1 @@
+insert into time (year) values(2016)

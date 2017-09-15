@@ -1,5 +1,6 @@
 package com.notation.back.configuration;
 
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -9,9 +10,13 @@ import org.apache.log4j.Logger;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
@@ -21,7 +26,8 @@ import com.jolbox.bonecp.BoneCPDataSource;
  * The Class DataWarehouseConfiguration.
  */
 @Configuration
-@EnableJpaRepositories(basePackages="com.notation.back.repository.datawarehouse", entityManagerFactoryRef = "dataWarehouseEntityManagerFactory", transactionManagerRef = "dwTransactionManager")
+@EnableJpaRepositories(basePackages="com.notation.back.datawarehouse.repository", entityManagerFactoryRef = "dataWarehouseEntityManagerFactory", transactionManagerRef = "dwTransactionManager")
+@ComponentScan("com.notation.back.datawarehouse.repository")
 public class DataWarehouseConfiguration {
 
 	/** The Constant LOGGER. */
@@ -67,6 +73,28 @@ public class DataWarehouseConfiguration {
 	/** The hibernate generate statistics. */
 	@Value("${hibernate.generate_statistics}")
 	private String hibernateGenerateStatistics;
+
+	/**
+	 * Configure Resource Database Populator
+	 * @param dataSource
+	 * @return ResourcepopulatorsPopulator
+	 * @throws SQLException
+	 * @throws ScriptException
+	 */
+	@Bean
+	@DependsOn("dataWarehouseEntityManagerFactory")
+	public ResourceDatabasePopulator initpopulators(final DataSource dataSource) throws SQLException {
+
+		final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.setSqlScriptEncoding("UTF-8");
+		populator.addScript(new ClassPathResource("populators/categories.sql"));
+		populator.addScript(new ClassPathResource("populators/indicatorslabel.sql"));
+		populator.addScript(new ClassPathResource("populators/times.sql"));
+		populator.addScript(new ClassPathResource("populators/countries.sql"));
+		populator.addScript(new ClassPathResource("populators/indicators.sql"));
+		populator.populate(dataSource.getConnection());
+		return populator;
+	}
 
 	/**
 	 * Configure data source.
